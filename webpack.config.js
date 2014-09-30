@@ -2,11 +2,6 @@
 'use strict';
 
 module.exports = {
-  entry: './client/main.jsx',
-  output: {
-    path: './client',
-    filename: 'bundle.js'
-  },
   module: {
     loaders: [
       { test: /\.jsx$/,           loader: 'jsx-loader?harmony'                    },

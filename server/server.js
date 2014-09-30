@@ -5,6 +5,9 @@ var koa = require('koa');
 var router = require('koa-router');
 var serve = require('koa-static');
 var body = require('koa-body');
+var r = require('rethinkdb')
+var Promise = require('bluebird')
+var rConnect = Promise.promisify(r.connect)
 
 // --- Koa Setup ---------------------------------------------------------------
 
@@ -23,24 +26,11 @@ app.get('/', function*() {
 })
 
 
-// EXAMPLE: call a database, in old school continuation style
-var r = require('rethinkdb')
-var Promise = require('bluebird')
+// --- Init ---------------------------------------------------------------------
 var connection = null
-
-connect().then(function(c) {
+rConnect({ host: 'localhost', port: 28015, db: 'test'}).then(function(c) {
     connection = c
-}, function(err) { console.log("CONNECTION ERROR: ", err)})
-
-function connect() {
-    return Promise.promisify(
-        r.connect({ host: 'localhost', port: 28015, db: 'test'})
-    )
-}
-
-function getMessage(conn, cb) {
-
-}
+}).done()
 
 server.listen(3000);
 console.log('server listening on port 3000');
