@@ -6,13 +6,13 @@ var livereload = require('gulp-livereload')
 gulp.task('webpack', function() {
     return gulp.src('client/main.jsx')
         .pipe(webpack( require('./webpack.config.js') ))
-        .pipe(rename('bundle.js'))
-        .pipe(gulp.dest('client/'))
+        .pipe(rename('main.js'))
+        .pipe(gulp.dest('client/bundle/'))
 });
 
 gulp.task('watch', function() {
   livereload.listen()
-  gulp.watch('client/bundle.js').on('change', livereload.changed)
+  gulp.watch('client/bundle/main.js').on('change', livereload.changed)
   gulp.watch('client/**.jsx', ['webpack'])
 })
 

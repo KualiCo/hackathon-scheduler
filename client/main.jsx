@@ -9,7 +9,7 @@ var HelloWorld = React.createClass({
   render: function() {
     return (
       <div>
-        Hello World, WORKING!
+        Hello World, asdfasdf....
       </div>
     );
   }
