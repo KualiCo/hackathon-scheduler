@@ -1,0 +1,19 @@
+{
+  "name": "hackathon-scheduler",
+  "version": "0.0.0",
+  "homepage": "https://github.com/KualiCo/hackathon-scheduler",
+  "authors": [
+    "Sean Clark Hess <seanhess@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "foundation": "zurb/bower-foundation#~5.4.5"
+  }
+}
