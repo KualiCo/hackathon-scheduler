@@ -7,7 +7,6 @@ Welcome to Hack Week! :)
 
 ##Install it
 
- - `npm install -g webpack`
  - `npm install`
 
 ##Hack on it
@@ -15,4 +14,6 @@ Welcome to Hack Week! :)
 In two different terminal sessions run:
 
  - `npm start`
- - `webpack -w`
+ - `gulp watch`
+
+ You can install the [livereload plugin](https://chrome.google.com/webstore/detail/livereload/jnihajbhpnppcggbcgedagnkighmdlei?hl=en) to get automatic refreshes
