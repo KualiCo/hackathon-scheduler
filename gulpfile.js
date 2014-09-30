@@ -9,7 +9,7 @@ var concat = require('gulp-concat')
 
 gulp.task('webpack', function() {
     return gulp.src('client/main.jsx')
-        .pipe(webpack( require('./webpack.config.js') ))
+        .pipe(webpack(require('./webpack.config.js') ))
         .pipe(rename('main.js'))
         .pipe(gulp.dest('client/bundle/'))
 });
@@ -44,8 +44,8 @@ gulp.task('js-bower-concat', ['js-bower-copy'], function() {
 
 gulp.task('watch', function() {
   livereload.listen()
-  gulp.watch('client/bundle/main.js').on('change', livereload.changed)
-  gulp.watch('client/**.jsx', ['webpack'])
+  gulp.watch(['client/bundle/main.js', 'client/main.css']).on('change', livereload.changed)
+  gulp.watch('client/**/*.jsx', ['webpack'])
 })
 
 gulp.task('default', ['webpack'])

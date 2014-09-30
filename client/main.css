@@ -1,0 +1,50 @@
+
+body {
+    padding: 10px;
+}
+
+.table-striped {
+
+}
+
+.table-striped-row:nth-child(even) {
+  background-color: #F2F2F2;
+}
+
+.td {
+  display: inline-block;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  padding-top: 2px;
+  padding:;
+}
+
+.table-header {
+  background-color: #F2F2F2;
+}
+
+.td.lg {
+  width: 200px;
+}
+
+.td.sm {
+  width: 100px;
+}
+
+.small-data {
+  font-size: small;
+}
+
+.flexbox {
+  display: flex;
+}
+
+.flex-1 {
+  flex: 1;
+}
+
+.flex-2 {
+  flex: 2;
+}
+
+

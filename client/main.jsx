@@ -9,11 +9,15 @@ var Link = Router.Link
 var Redirect = Router.Redirect
 
 var Hello = require('./requests/hello.jsx')
+var RequestList = require('./requests/requests.jsx')
+var RequestNew = require('./requests/requests-new.jsx')
 
 var routes = (
     <Routes>
         <Route name="hello" path="/hello" handler={Hello} />
-        <Redirect path="/" to="/hello" />
+        <Route name="requests" path="/requests" handler={RequestList}/>
+        <Route name="requests-new" path="/requests/new" handler={RequestNew}/>
+        <Redirect path="/" to="/requests" />
     </Routes>
 )
 
