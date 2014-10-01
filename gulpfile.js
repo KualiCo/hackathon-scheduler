@@ -8,7 +8,7 @@ var flatten = require('gulp-flatten')
 var concat = require('gulp-concat')
 
 gulp.task('webpack', function() {
-    return gulp.src('client/main.jsx')
+    return gulp.src('client/app/main.jsx')
         .pipe(webpack(require('./webpack.config.js') ))
         .pipe(rename('main.js'))
         .pipe(gulp.dest('client/bundle/'))
@@ -45,7 +45,7 @@ gulp.task('js-bower-concat', ['js-bower-copy'], function() {
 gulp.task('watch', function() {
   livereload.listen()
   gulp.watch(['client/bundle/main.js', 'client/main.css']).on('change', livereload.changed)
-  gulp.watch('client/**/*.jsx', ['webpack'])
+  gulp.watch(['client/app/**/*.jsx', 'client/app/**/*.js'], ['webpack'])
 })
 
 gulp.task('default', ['webpack', 'bower'])

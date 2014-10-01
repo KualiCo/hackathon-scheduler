@@ -45,7 +45,11 @@ module.exports = React.createClass({
   },
 
   searchText: function(event) {
-    this.setState({search:event.target.value})
+    var searchQuery = event.target.value
+    this.setState({
+      search: searchQuery,
+      requests: store.matchingSearch(searchQuery),
+    })
   }
 })
 
