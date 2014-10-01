@@ -22,7 +22,9 @@
     "main-bower-files": "^2.0.0",
     "gulp-concat": "^2.4.1",
     "gulp-flatten": "0.0.3",
-    "gulp-filter": "^1.0.2"
+    "gulp-filter": "^1.0.2",
+    "traceur": "0.0.66",
+    "webpack-traceur-loader": "git://github.com/seanhess/webpack-traceur-loader.git"
   },
   "dependencies": {
     "react": "^0.11.2",

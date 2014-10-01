@@ -1,17 +1,15 @@
 /** @jsx React.DOM */
 var React = require('react')
 var InputBar = require('../lib/input-bar.jsx')
+var store = require('./requests-store')
+
 module.exports = React.createClass({
 
   getInitialState: function() {
     return {
-      search: "",
-      requests:[
-        {name: "TEST 101", time: "MWF 10am", room: "BUILD 221", priority: 1},
-        {name: "TEST 201", time: "MWF 10am", room: "BUILD 221", priority: 1},
-        {name: "TEST 101", time: "MWF 10am", room: "BUILD 221", priority: 1},
-        {name: "TEST 101", time: "MWF 10am", room: "BUILD 221", priority: 1},
-      ]}
+      search: "woot",
+      requests: store.requests,
+    }
   },
 
   render: function() {
@@ -20,9 +18,10 @@ module.exports = React.createClass({
       <div>
         <h1>Scheduler: Requests</h1>
         <InputBar className="search-bar">
-          <input type="text" placeholder="ECON 101" />
-          <button className="postfix">Hello</button>
+          <input type="text" placeholder="ECON 101" onChange={this.searchText}/>
+          <button className="postfix">Schedule Course</button>
         </InputBar>
+        <div>Current Search: <span>{this.state.search}</span></div>
         <div>
           <div className="flexbox">
             <span className="td table-header flex-2">Course</span>
@@ -42,11 +41,11 @@ module.exports = React.createClass({
   },
 
   scheduleNewCourse: function() {
-    console.log("SCHEDULE NEW COURSE")
+
   },
 
-  searchText: function(value) {
-    this.setState({search:value})
+  searchText: function(event) {
+    this.setState({search:event.target.value})
   }
 })
 

@@ -48,4 +48,4 @@ gulp.task('watch', function() {
   gulp.watch('client/**/*.jsx', ['webpack'])
 })
 
-gulp.task('default', ['webpack'])
+gulp.task('default', ['webpack', 'bower'])
