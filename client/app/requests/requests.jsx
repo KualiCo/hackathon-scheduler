@@ -24,38 +24,46 @@ var RequestTable = require('./requests-table')
 // needs to create bindings to data that propogate down
 // and observe the model closely
 
+
 var RequestListMain = React.createClass({
+
+  // My State: searchText. NOT the filtered list.
+  // http://facebook.github.io/react/blog/2013/11/05/thinking-in-react.html
   getInitialState: function() {
     return {
-      search: "",
+      searchText: "",
       requests: [],
     }
   },
 
   componentDidMount: function() {
-    // I need to set up a relationship here...
-    // how do I do this?
+    // observe the store's requests
+    // + filter by search text
+    // -> searchText
+    // -> new requests
+    store.onRequests.subscribe(function(value) {
+      this.setState({requests: store.requests})
+    }.bind(this))
   },
 
   render: function() {
+    // it's built from the searchText + data store
+    var filteredRequests = store.matchingSearch(this.state.requests, this.state.searchText)
+
     return (
       <div className="main-content-padding">
-        <InputBar className="search-bar">
-          <input type="text" placeholder="ECON 101" onChange={this.searchText}/>
-          <button className="postfix">Schedule Course</button>
-        </InputBar>
-        <RequestTable requests={this.state.requests}/>
+        <RequestListSearchBar 
+          onSearch={this.onSearch}
+          searchText={this.state.searchText} />
+        <RequestTable requests={filteredRequests}/>
         <div><button onClick={this.addRandom}>Add Random Data</button></div>
       </div>
     )
   },
 
-  searchText: function(event) {
-    var searchQuery = event.target.value
-    this.setState({
-      search: searchQuery,
-    })
-    // TODO: Fix search
+  onSearch: function(searchText) {
+    // this will re-trigger render automatically
+    this.setState({searchText: searchText})
   },
 
   addRandom: function() {
@@ -65,12 +73,23 @@ var RequestListMain = React.createClass({
   },
 })
 
-var RequestListView = React.createClass({
-  render: function() {
+var RequestListSearchBar = React.createClass({
 
+  onChange: function(event) {
+    this.props.onSearch(event.target.value)
+  },
+
+  render: function() {
+    return (
+      <InputBar className="search-bar">
+        <input type="text" placeholder="ECON 101" 
+        value={this.props.searchText}
+        onChange={this.onChange} />
+        <button className="postfix">Schedule Course</button>
+      </InputBar>
+    )
   },
 })
-
 
 module.exports = RequestListMain
 
