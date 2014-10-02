@@ -1,11 +1,18 @@
 
+
+// Request { course, schedules:[Booking] }
+// Schedule { room, days, start, end }
+
 class RequestsStore {
   constructor() {
     this.requests = [
-      {name: "TEST 101", time: "MWF 10am", room: "BUILD 221", priority: 1},
-      {name: "TEST 201", time: "MWF 10am", room: "BUILD 221", priority: 1},
-      {name: "TEST 301", time: "MWF 10am", room: "BUILD 221", priority: 1},
-      {name: "TEST 401", time: "MWF 10am", room: "BUILD 221", priority: 1},
+      {course: "TEST 101", schedules: [
+        {days: "MWF", start: "10:00", end: "10:45", room: "BUILD 221"},
+        {days: "TTh", start: "11:00", end: "14:00", room: "BUILD 221"},
+      ]},
+      {course: "TEST 551", schedules: [
+        {days: "TTh", start: "8:00", end: "10:00", room: "BUILD 313"},
+      ]},
     ]
   }
 
@@ -14,6 +21,15 @@ class RequestsStore {
     return this.requests.filter(function(request) {
       return request.name.toLowerCase().match(query)
     })
+  }
+
+  addRandomData() {
+    console.log("ADD RANDOM DATA")
+    var randomRequest = {course: "TEST 333", schedules: [
+        {days: "TTh", start: "8:00", end: "10:00", room: "BUILD 313"},
+      ]}
+    this.requests.push(randomRequest)
+    // annnnnd.... I need to refresh
   }
 }
 

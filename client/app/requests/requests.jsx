@@ -2,76 +2,77 @@
 var React = require('react')
 var InputBar = require('../lib/input-bar.jsx')
 var store = require('./requests-store')
+var RequestTable = require('./requests-table')
 
-module.exports = React.createClass({
 
+
+// http://swannodette.github.io/2013/12/17/the-future-of-javascript-mvcs/
+// https://news.ycombinator.com/item?id=6936975
+
+// NOTES:
+// http://joshbassett.info/2014/reactive-uis-with-react-and-bacon/
+// someone says: setState is a code smell (unless it is a selected tab or something)
+// ALWAYS accept props, and just re-render any time things change. It is fast. Trust it
+
+// Integration Components (Controller)
+// - model + view
+// - calls re-render whenever anything happens
+// Sub-components
+
+// TRY: this should be a prop! Just re-render. wow
+// TOP-LEVEL COMPONENT
+// needs to create bindings to data that propogate down
+// and observe the model closely
+
+var RequestListMain = React.createClass({
   getInitialState: function() {
     return {
-      search: "woot",
-      requests: store.requests,
+      search: "",
+      requests: [],
     }
   },
 
+  componentDidMount: function() {
+    // I need to set up a relationship here...
+    // how do I do this?
+  },
+
   render: function() {
-    var requests = this.state.requests
     return (
-      <div>
-        <h1>Scheduler: Requests</h1>
+      <div className="main-content-padding">
         <InputBar className="search-bar">
           <input type="text" placeholder="ECON 101" onChange={this.searchText}/>
           <button className="postfix">Schedule Course</button>
         </InputBar>
-        <div>Current Search: <span>{this.state.search}</span></div>
-        <div>
-          <div className="flexbox">
-            <span className="td table-header flex-2">Course</span>
-            <span className="td table-header flex-1">Room</span>
-            <span className="td table-header flex-1">Time</span>
-          </div>
-          <div>{requests.map(this.renderRequestRow)}</div>
-        </div>
+        <RequestTable requests={this.state.requests}/>
+        <div><button onClick={this.addRandom}>Add Random Data</button></div>
       </div>
     )
-  },
-
-  renderRequestRow: function(request) {
-    return (
-      <RequestRow request={request}/>
-    )
-  },
-
-  scheduleNewCourse: function() {
-
   },
 
   searchText: function(event) {
     var searchQuery = event.target.value
     this.setState({
       search: searchQuery,
-      requests: store.matchingSearch(searchQuery),
     })
-  }
+    // TODO: Fix search
+  },
+
+  addRandom: function() {
+    // how can I display this automatically? 
+    // IE: observe the store?
+    store.addRandomData()
+  },
 })
 
-var RequestRow = React.createClass({
+var RequestListView = React.createClass({
   render: function() {
-    var request = this.props.request
-    return (
-      <div className="table-striped-row flexbox">
-        <span className="td flex-1">{request.name}</span>
-        <div className="td flex-1">
-          <div className="flexbox">
-            <span className="td flex-1 small-data">{request.room}</span>
-            <span className="td flex-1 small-data">{request.time}</span>
-          </div>
-          <div className="flexbox">
-            <span className="td flex-1 small-data">{request.room}</span>
-            <span className="td flex-1 small-data">{request.time}</span>
-          </div>
-        </div>
-      </div>
-    )
-  }
+
+  },
 })
+
+
+module.exports = RequestListMain
+
 
 

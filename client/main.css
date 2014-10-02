@@ -1,10 +1,7 @@
 
-body {
-    padding: 10px;
-}
 
-.table-striped {
-
+.main-content-padding {
+  padding: 1.1em;
 }
 
 .table-striped-row:nth-child(even) {
